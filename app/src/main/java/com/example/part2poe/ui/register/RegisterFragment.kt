@@ -1,5 +1,6 @@
 package com.example.part2poe.ui.register
 
+import LoginViewModel
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -16,18 +17,18 @@ import com.example.part2poe.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
-
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    // Lazily initialize loginViewModel
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val registerViewModel =
-            ViewModelProvider(this).get(RegisterViewModel::class.java)
-
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -86,8 +87,11 @@ class RegisterFragment : Fragment() {
         username: String,
         password: String
     ) {
-        // Mock registration process (replace with your actual registration process)
         Toast.makeText(requireContext(), "Registration successful!", Toast.LENGTH_SHORT).show()
+
+        // Update the LoginViewModel with the registered credentials
+        loginViewModel.setRegisteredUserCredentials(username, password)
+
         // Call the clearFields and navigateToLogin functions here
         clearFields(binding.editName, binding.editSurname, binding.editEmail, binding.editUsername, binding.editPassword)
         navigateToLogin()
@@ -104,7 +108,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun togglePasswordVisibility(editPassword: TextView, iconViewPassword: View) {
-        // Toggle password visibility logic
         val inputType = editPassword.inputType
         if (inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
             editPassword.inputType =
@@ -114,10 +117,8 @@ class RegisterFragment : Fragment() {
             editPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             iconViewPassword.setBackgroundResource(R.drawable.visibility_icon)
         }
-        // Check if editPassword is an EditText before calling setSelection
         if (editPassword is EditText) {
-            editPassword.setSelection(editPassword.text.length) // Keep cursor at the end
+            editPassword.setSelection(editPassword.text.length)
         }
     }
-
 }

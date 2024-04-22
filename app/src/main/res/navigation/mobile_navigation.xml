@@ -35,4 +35,10 @@
         android:id="@+id/action_registerFragment_to_loginFragment"
         app:destination="@id/nav_login" />
 
+   <fragment
+       android:id="@+id/nav_forgetpassword"
+       android:name="com.example.part2poe.ui.forgetpassword.ForgetPasswordFragment"
+       android:label="Forget Password"
+       tools:layout="@layout/fragment_forgetpassword" />
+
 </navigation>

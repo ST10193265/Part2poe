@@ -11,4 +11,9 @@
     <string name="menu_register">Register</string>
     <string name="menu_login">Login</string>
     <string name="tick_tock">TICK TOCK</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="view_password">View Password</string>
+    <string name="login">Login</string>
 </resources>
