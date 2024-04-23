@@ -1,6 +1,6 @@
 package com.example.part2poe.ui.login
 
-import LoginViewModel
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
 import com.example.part2poe.databinding.FragmentLoginBinding
 
@@ -20,6 +21,7 @@ class LoginFragment : Fragment() {
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,14 +38,20 @@ class LoginFragment : Fragment() {
             togglePasswordVisibility()
         }
 
+        binding.tvForgotPassword.setOnClickListener {
+            onForgotPasswordClicked()
+        }
+
         return root
     }
+
     override fun onResume() {
         super.onResume()
 
         // Clear the entered username and password fields when returning to the login screen
         binding.editUsername.text.clear()
         binding.editPassword.text.clear()
+
     }
 
     override fun onDestroyView() {
@@ -55,21 +63,38 @@ class LoginFragment : Fragment() {
         val username = binding.editUsername.text.toString()
         val password = binding.editPassword.text.toString()
 
-        Log.d("LoginFragment", "Entered Username: $username, Entered Password: $password")
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
 
-        val isValid = loginViewModel.isValidUser(username, password)
+        val isPasswordUpdated = sharedPref.getBoolean("password_updated", false)
 
-        Log.d("LoginFragment", "Validation Result: $isValid")
+        if (isPasswordUpdated) {
+            val newPassword = loginViewModel.getPassword(username)
 
-        if (isValid) {
-            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-            // Navigate to the main activity or perform other necessary actions
+            Log.d("LoginFragment", "Expected Username: $username, Expected Password: $newPassword")
+            if (newPassword != null && password == newPassword) {
+                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
+            }
         } else {
-            Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
+            val isValid = loginViewModel.isValidUser(username, password)
+            if (isValid) {
+                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun togglePasswordVisibility() {
+    private fun onForgotPasswordClicked() {
+        val username = binding.editUsername.text.toString()
+        val email = loginViewModel.getEmail(username) ?: ""
+
+        // Navigate to the ForgetPasswordFragment
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetpasswordFragment(username, email))
+    }
+
+private fun togglePasswordVisibility() {
         val inputType = binding.editPassword.inputType
         if (inputType == android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
             binding.editPassword.inputType =
@@ -83,6 +108,4 @@ class LoginFragment : Fragment() {
             binding.editPassword.setSelection(binding.editPassword.text.length)
         }
     }
-
-
 }

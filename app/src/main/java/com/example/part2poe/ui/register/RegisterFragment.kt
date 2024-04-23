@@ -1,6 +1,6 @@
 package com.example.part2poe.ui.register
 
-import LoginViewModel
+
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
 import com.example.part2poe.databinding.FragmentRegisterBinding
+import com.example.part2poe.ui.login.LoginViewModel
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -90,7 +91,7 @@ class RegisterFragment : Fragment() {
         Toast.makeText(requireContext(), "Registration successful!", Toast.LENGTH_SHORT).show()
 
         // Update the LoginViewModel with the registered credentials
-        loginViewModel.setRegisteredUserCredentials(username, password)
+        loginViewModel.setRegisteredUserCredentials(username, password, email)
 
         // Call the clearFields and navigateToLogin functions here
         clearFields(binding.editName, binding.editSurname, binding.editEmail, binding.editUsername, binding.editPassword)

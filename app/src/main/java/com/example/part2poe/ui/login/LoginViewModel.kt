@@ -1,3 +1,4 @@
+package com.example.part2poe.ui.login
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -6,10 +7,11 @@ class LoginViewModel : ViewModel() {
 
     private var _registeredUsername: String? = null
     private var _registeredPassword: String? = null
-
-    fun setRegisteredUserCredentials(username: String, password: String) {
+    private var _registeredEmail: String? = null
+    fun setRegisteredUserCredentials(username: String, password: String, email: String) {
         _registeredUsername = username.trim()  // Trim whitespaces
         _registeredPassword = password.trim()  // Trim whitespaces
+        _registeredEmail = email.trim()
 
         Log.d("LoginViewModel", "Registered Username Set: $_registeredUsername")
         Log.d("LoginViewModel", "Registered Password Set: $_registeredPassword")
@@ -26,5 +28,12 @@ class LoginViewModel : ViewModel() {
         Log.d("LoginViewModel", "Validation Result: $isValid")
 
         return isValid
+    }
+
+    fun getPassword(username: String): String? {
+        return _registeredPassword
+    }
+    fun getEmail(username: String): String? {
+        return _registeredEmail
     }
 }
