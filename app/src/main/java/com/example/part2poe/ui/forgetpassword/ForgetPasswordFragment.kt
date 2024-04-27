@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
-import com.example.part2poe.ui.forgetpassword.ForgetPasswordFragmentDirections
-import com.example.part2poe.ui.forgetpassword.ForgetPasswordViewModel
+import com.example.part2poe.databinding.FragmentLoginBinding
+import com.example.part2poe.ui.login.LoginViewModel
 
 class ForgetPasswordFragment : Fragment() {
 
@@ -24,12 +24,21 @@ class ForgetPasswordFragment : Fragment() {
     private lateinit var username: String
     private lateinit var email: String
     private lateinit var newPassword: String
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+    // Lazily initialize loginViewModel
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
         forgetPasswordViewModel = ViewModelProvider(this).get(ForgetPasswordViewModel::class.java)
 
         // Retrieve username and email from arguments
@@ -57,7 +66,7 @@ class ForgetPasswordFragment : Fragment() {
                 Log.d("ForgetPasswordFragment", "Current Password for $username: ${forgetPasswordViewModel.getPassword(username)}")
 
                 val isPasswordUpdated = forgetPasswordViewModel.updatePassword(username, newPassword)
-
+                loginViewModel.setUpdatedPassword(newPassword)
                 Log.d("ForgetPasswordFragment", "Password update result: $isPasswordUpdated")
 
                 if (isPasswordUpdated) {
@@ -72,7 +81,7 @@ class ForgetPasswordFragment : Fragment() {
 
                     Log.d("ForgetPasswordFragment", "Expected Username: $username, Expected Password: $newPassword")
                     Toast.makeText(context, "Password updated successfully", Toast.LENGTH_SHORT).show()
-                    navigateToLogin()
+                    navigateToLogin(newPassword)
                 } else {
                     Toast.makeText(context, "Failed to update password", Toast.LENGTH_SHORT).show()
                 }
@@ -82,9 +91,9 @@ class ForgetPasswordFragment : Fragment() {
         }
         return root
     }
-
-    private fun navigateToLogin() {
-        findNavController().navigate(ForgetPasswordFragmentDirections.actionForgetpasswordFragmentToLoginFragment())
+    private fun navigateToLogin(updatedPassword: String) {
+        val action = ForgetPasswordFragmentDirections.actionForgetpasswordFragmentToLoginFragment(newPassword)
+        findNavController().navigate(action)
     }
 
     private fun togglePasswordVisibility(editPassword: TextView, iconViewPassword: View) {

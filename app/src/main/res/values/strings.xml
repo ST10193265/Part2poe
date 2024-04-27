@@ -16,4 +16,6 @@
     <string name="password">Password</string>
     <string name="view_password">View Password</string>
     <string name="login">Login</string>
+    <string name="menu_maintimelog" />
+    <string name="menu_home" />
 </resources>

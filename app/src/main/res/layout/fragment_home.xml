@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Select an Option Below:"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:padding="35dp"/>
+
+    <Button
+        android:id="@+id/button_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="Category" />
+
+    <Button
+        android:id="@+id/button_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Projects"
+        android:layout_marginBottom="35dp" />
+
+    <Button
+        android:id="@+id/button_timelog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time Log"
+        android:layout_marginBottom="35dp" />
+
+    <Button
+        android:id="@+id/button_invoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invoice"
+        android:layout_marginBottom="35dp" />
+
+    <Button
+        android:id="@+id/button_focustime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Focus Time"
+        android:layout_marginBottom="35dp" />
+
+</LinearLayout>

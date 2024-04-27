@@ -8,6 +8,7 @@ class LoginViewModel : ViewModel() {
     private var _registeredUsername: String? = null
     private var _registeredPassword: String? = null
     private var _registeredEmail: String? = null
+    private var _updatedPassword: String? = null
     fun setRegisteredUserCredentials(username: String, password: String, email: String) {
         _registeredUsername = username.trim()  // Trim whitespaces
         _registeredPassword = password.trim()  // Trim whitespaces
@@ -15,6 +16,12 @@ class LoginViewModel : ViewModel() {
 
         Log.d("LoginViewModel", "Registered Username Set: $_registeredUsername")
         Log.d("LoginViewModel", "Registered Password Set: $_registeredPassword")
+    }
+
+    fun setUpdatedPassword( password: String) {
+
+        _updatedPassword = password.trim()  // Trim whitespaces
+
     }
 
     fun isValidUser(username: String, password: String): Boolean {
