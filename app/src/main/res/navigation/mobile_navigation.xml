@@ -131,4 +131,18 @@
         android:id="@+id/action_homeFragment_to_main_projectFragment"
         app:destination="@id/nav_main_project" />
 
+    <fragment
+        android:id="@+id/nav_add_project"
+        android:name="com.example.part2poe.ui.add_project.AddProjectFragment"
+        android:label="Add New Project"
+        tools:layout="@layout/fragment_add_project" />
+
+    <action
+        android:id="@+id/action_main_projectFragment_to_add_projectFragment"
+        app:destination="@id/nav_add_project" />
+
+    <action
+        android:id="@+id/action_add_projectFragment_to_main_projectFragment"
+        app:destination="@id/nav_main_project" />
+
 </navigation>

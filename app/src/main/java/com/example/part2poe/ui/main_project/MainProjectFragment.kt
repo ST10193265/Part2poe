@@ -39,7 +39,7 @@ class MainProjectFragment : Fragment() {
     }
 
     private fun navigateToAddProject() {
-        findNavController().navigate(MainProjectFragmentDirections.actionHomeFragmentToMainProjectFragment())
+        findNavController().navigate(MainProjectFragmentDirections.actionMainProjectFragmentToAddProjectFragment())
     }
 
     override fun onDestroyView() {
