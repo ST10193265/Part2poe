@@ -47,7 +47,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainCategoryFragment())
             }
             R.id.button_project -> {
-                // Handle Projects button click
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainProjectFragment())
             }
             R.id.button_timelog -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMaintimelogFragment())
