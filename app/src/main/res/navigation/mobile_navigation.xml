@@ -58,8 +58,6 @@
         android:id="@+id/action_forgetpasswordFragment_to_loginFragment"
         app:destination="@id/nav_login" >
 
-
-
         <argument
             android:name="newPassword"
             app:argType="string" />
@@ -85,6 +83,17 @@
         android:name="com.example.part2poe.ui.maintimelog.MainTimeLogFragment"
         android:label="@string/menu_maintimelog"
         tools:layout="@layout/fragment_maintimelog" />
+
+
+    <fragment
+        android:id="@+id/nav_addtimelog"
+        android:name="com.example.part2poe.ui.addtimelog.AddTimeLogFragment"
+        android:label="@string/menu_addtimelog"
+        tools:layout="@layout/fragment_addtimelog" />
+
+    <action
+        android:id="@+id/action_maintimelogFragment_to_addtimelogFragment"
+        app:destination="@id/nav_addtimelog" />
 
 
     <fragment
