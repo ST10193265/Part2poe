@@ -26,17 +26,16 @@ class MainCategoryFragment : Fragment() {
         // Find the Add New Category button and set a click listener
         val addCategoryButton: Button = binding.btnAddNewCategory
         addCategoryButton.setOnClickListener {
-           // navigateToAddCategory()
+           navigateToAddCategory()
         }
 
-        //categroyArray()
 
         return root
     }
 
-    /*private fun navigateToAddCategory() {
-        findNavController().navigate(MainCategoryFragmentDirections.actionMaincategoryFragmentToAddcategroyFragment())
-    }*/
+    private fun navigateToAddCategory() {
+        findNavController().navigate(MainCategoryFragmentDirections.actionMainCategoryFragmentToAddCategoryFragment())
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

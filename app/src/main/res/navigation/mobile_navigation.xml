@@ -99,4 +99,17 @@
 
 
 
+    <fragment
+        android:id="@+id/nav_add_category"
+        android:name="com.example.part2poe.ui.add_category.AddCategoryFragment"
+        android:label="Add New Category"
+        tools:layout="@layout/fragment_add_category" />
+    <action
+        android:id="@+id/action_main_categoryFragment_to_add_categoryFragment"
+        app:destination="@id/nav_add_category" />
+
+    <action
+        android:id="@+id/action_add_categoryFragment_to_main_categoryFragment"
+        app:destination="@id/nav_main_category" />
+
 </navigation>
