@@ -46,17 +46,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
             R.id.button_category -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainCategoryFragment())
             }
+
             R.id.button_project -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainProjectFragment())
             }
+
             R.id.button_timelog -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMaintimelogFragment())
             }
+
             R.id.button_invoice -> {
                 // Handle Invoice button click
             }
+
             R.id.button_focustime -> {
-                // Handle Focus Time button click
+               findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainFocusTimeFragment())
+
             }
         }
     }
