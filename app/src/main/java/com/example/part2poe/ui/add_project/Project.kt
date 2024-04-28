@@ -6,3 +6,4 @@ data class Project(val projectName: String, val minGoal: String, val maxGoal: St
 {
 
 }
+// stores all th project objects

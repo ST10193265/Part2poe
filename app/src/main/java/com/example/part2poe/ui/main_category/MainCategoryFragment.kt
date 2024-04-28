@@ -14,6 +14,7 @@ import com.example.part2poe.databinding.FragmentMainCategoryBinding
 class MainCategoryFragment : Fragment() {
     private var _binding: FragmentMainCategoryBinding? = null
     private val binding get() = _binding!!
+    // bindes the layout fragement
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +27,9 @@ class MainCategoryFragment : Fragment() {
         // Find the Add New Category button and set a click listener
         val addCategoryButton: Button = binding.btnAddNewCategory
         addCategoryButton.setOnClickListener {
-           navigateToAddCategory()
+            navigateToAddCategory()
+            // navigates to the add categroy
         }
-
 
         return root
     }
@@ -36,6 +37,7 @@ class MainCategoryFragment : Fragment() {
     private fun navigateToAddCategory() {
         findNavController().navigate(MainCategoryFragmentDirections.actionMainCategoryFragmentToAddCategoryFragment())
     }
+    // navigates to the ad category
 
     override fun onDestroyView() {
         super.onDestroyView()

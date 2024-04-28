@@ -19,6 +19,7 @@ class AddCategoryFragment : Fragment() {
 
     private var _binding: FragmentAddCategoryBinding? = null
     private val binding get() = _binding!!
+    // binds the layout fragment
 
     // Lazily initialize loginViewModel
     private val addCategoryViewModel: AddCategoryViewModel by lazy {
@@ -37,6 +38,7 @@ class AddCategoryFragment : Fragment() {
         val editDescription = binding.etxtDescription
         val btnSave = binding.btnSave
         val btnCancel = binding.btnCancel
+        // binds all the feilds
 
         btnSave.setOnClickListener()
         {
@@ -45,18 +47,8 @@ class AddCategoryFragment : Fragment() {
 
             if (isValidInput(categoryname, description)) {
                 addnewCategory(categoryname, description)
-
-                val arrayAsString = GlobalVar.GlobalVariables.oagCategory.joinToString("\n")
-
-
-
-                val stringBuilder = StringBuilder()
-
-                GlobalVar.GlobalVariables.oagCategory.forEach { item ->
-                    stringBuilder.append(item.categoryname).append("\n")
-                }
-
-
+                // validates the data entered then adds it to the category class
+                navigateToMainCatgeory()
             }
             else {
                 Toast.makeText(
@@ -64,8 +56,10 @@ class AddCategoryFragment : Fragment() {
                     "Please fill in all the fields",
                     Toast.LENGTH_SHORT
                 ).show()
+                // gives the user a msg if no data is entered
             }
-
+            //navigateToMainCatgeory()
+           // findNavController().navigate(MainCategoryFragmentDirections.actionAddCategoryFragmentToMainCategoryFragment())
 
 
         }
@@ -90,20 +84,20 @@ class AddCategoryFragment : Fragment() {
     ): Boolean {
         return categoryname.isNotEmpty() && description.isNotEmpty()
     }
-
+    // validates the data
 
     private fun addnewCategory(categoryname: String, description: String)
     {
         val category = Category(categoryname, description)
-
+        // saves to the ategory class
         GlobalVar.GlobalVariables.oagCategory.add(category)
         Toast.makeText(requireContext(), "New category added successful!", Toast.LENGTH_SHORT)
             .show()
-
+        // gives the user a msg that the category is added
 
         // Call the clearFields and navigateToMainCategory functions here
         clearFields(binding.etxtCategoryName, binding.etxtDescription)
-        navigateToMainCatgeory()
+
     }
 
 
@@ -112,9 +106,11 @@ class AddCategoryFragment : Fragment() {
             editText.text.clear()
         }
     }
+    // clears the feilds
 
     private fun navigateToMainCatgeory() {
         findNavController().navigate(MainCategoryFragmentDirections.actionAddCategoryFragmentToMainCategoryFragment())
     }
+    // navigates to the main category
 
 }

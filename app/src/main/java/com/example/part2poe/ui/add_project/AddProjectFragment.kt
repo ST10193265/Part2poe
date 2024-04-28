@@ -20,6 +20,7 @@ import com.example.part2poe.ui.main_project.MainProjectFragmentDirections
 class AddProjectFragment : Fragment() {
     private var _binding: FragmentAddProjectBinding? = null
     private val binding get() = _binding!!
+    //binds the layout fragment
 
     private val addProjectViewModel: AddProjectViewModel by lazy {
         ViewModelProvider(requireActivity()).get(AddProjectViewModel::class.java)
@@ -33,15 +34,15 @@ class AddProjectFragment : Fragment() {
         _binding = FragmentAddProjectBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-       val editProjectName = binding.etxtProjecName
+        val editProjectName = binding.etxtProjecName
         val editMinGoal = binding.etxtMinGoal
         val editMaxGoal = binding.etxtMaxGoal
         val editCost = binding.etxtCost
         val editCategory = binding.dpCategory
         val editCalendar = binding.calendarView
-        val testproject = binding.textView3
         val btnSave = binding.btnSave
         val btnCancel = binding.btnCancel
+        // binds all the feilds
 
         // Create a list of category names
        val categoryNames = GlobalVar.GlobalVariables.oagCategory.map { it.categoryname }
@@ -62,19 +63,20 @@ class AddProjectFragment : Fragment() {
 
             if (isValidInput(projectName, minGoal, maxGoal, cost, calendar)) {
                 addNewProject(projectName, minGoal, maxGoal, cost, calendar, category)
-                testproject.text = buildProjectString(projectName, minGoal, maxGoal, cost, calendar, category)
+                // validates the data eneterd then adds it to the project class
             } else {
                 Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
 
 
-           // navigateToMainProject()
-
-            clearFields(editProjectName, editMinGoal, editMaxGoal, editCost)
+           navigateToMainProject()
+           clearFields(editProjectName, editMinGoal, editMaxGoal, editCost)
+            //clears feilds and then navigates to main project
         }
 
         btnCancel.setOnClickListener {
             clearFields(editProjectName, editMinGoal, editMaxGoal, editCost)
+            // clears feilds
         }
         return root
     }
@@ -89,6 +91,7 @@ class AddProjectFragment : Fragment() {
     ): Boolean {
         return projectName.isNotEmpty() && minGoal.isNotEmpty() && maxGoal.isNotEmpty() && cost.isNotEmpty() && calendar.isNotEmpty()
     }
+    // validates feilds
 
     private fun addNewProject(
         projectName: String,
@@ -101,8 +104,6 @@ class AddProjectFragment : Fragment() {
         val project = Project(projectName, minGoal, maxGoal, cost, calendar, category)
         GlobalVar.GlobalVariables.oagProject.add(project)
 
-
-
         Toast.makeText(requireContext(), "New project added successfully!", Toast.LENGTH_SHORT).show()
     }
 
@@ -111,26 +112,15 @@ class AddProjectFragment : Fragment() {
             editText.text.clear()
         }
     }
+    // clears feilds
+
 
     private fun navigateToMainProject() {
         findNavController().navigate(MainProjectFragmentDirections.actionAddProjectFragmentToMainProjectFragment())
     }
+    //navigates to main project
 
-    private fun buildProjectString(
-        projectName: String,
-        minGoal: String,
-        maxGoal: String,
-        cost: String,
-        calendar: String,
-        category: String
-    ): String {
-        return "Project Name: $projectName\n" +
-                "Minimum Goal: $minGoal\n" +
-                "Maximum Goal: $maxGoal\n" +
-                "Cost: $cost\n" +
-                "Calendar: $calendar\n" +
-                "Category: $category"
-    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

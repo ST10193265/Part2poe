@@ -165,4 +165,8 @@
     <action
         android:id="@+id/action_main_focus_timeFragment_to_add_focus_timeFragment"
         app:destination="@id/nav_add_focus_time" />
+
+    <action
+        android:id="@+id/action_add_focus_timeFragment_to_main_focus_timeFragment"
+        app:destination="@id/nav_main_focus_time" />
 </navigation>
