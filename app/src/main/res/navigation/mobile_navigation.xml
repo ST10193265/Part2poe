@@ -84,6 +84,7 @@
         android:label="@string/menu_maintimelog"
         tools:layout="@layout/fragment_maintimelog" />
 
+
     <fragment
         android:id="@+id/nav_addtimelog"
         android:name="com.example.part2poe.ui.addtimelog.AddTimeLogFragment"
@@ -93,5 +94,18 @@
     <action
         android:id="@+id/action_maintimelogFragment_to_addtimelogFragment"
         app:destination="@id/nav_addtimelog" />
+
+
+    <fragment
+        android:id="@+id/nav_main_category"
+        android:name="com.example.part2poe.ui.main_category.MainCategoryFragment"
+        android:label="Main Category"
+        tools:layout="@layout/fragment_main_category" />
+
+    <action
+        android:id="@+id/action_homeFragment_to_main_categoryFragment"
+        app:destination="@id/nav_main_category" />
+
+
 
 </navigation>

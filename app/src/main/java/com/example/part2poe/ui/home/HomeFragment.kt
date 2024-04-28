@@ -44,7 +44,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_category -> {
-                // Handle Category button click
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainCategoryFragment())
             }
             R.id.button_project -> {
                 // Handle Projects button click
