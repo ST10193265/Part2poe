@@ -6,26 +6,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
 
+import com.example.part2poe.databinding.FragmentMainFocusTimeBinding
+import com.example.part2poe.ui.add_focus_time.AddFocusTimeViewModel
+
+
 class MainFocusTimeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MainFocusTimeFragment()
-    }
-
-    private val viewModel: MainFocusTimeViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
+    private var _binding: FragmentMainFocusTimeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main_focus_time, container, false)
+        _binding = FragmentMainFocusTimeBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        val addFocusTimeViewModel = ViewModelProvider(this).get(AddFocusTimeViewModel::class.java)
+
+
+        val addFocusTimeButton: Button = binding.btnAddFocusTime
+        addFocusTimeButton.setOnClickListener {
+            navigateToAddFocusTime()
+            //Toast.makeText(requireContext(), GlobalVar.GlobalVariables.oagProject.size, Toast.LENGTH_SHORT)
+        }
+
+        return root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun navigateToAddFocusTime(){
+        findNavController().navigate(MainFocusTimeFragmentDirections.actionMainFocusTimeFragmentToAddFocusTimeFragment())
+    }
+
 }

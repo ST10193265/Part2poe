@@ -156,4 +156,13 @@
         app:destination="@id/nav_main_focus_time" />
 
 
+    <fragment
+        android:id="@+id/nav_add_focus_time"
+        android:name="com.example.part2poe.ui.add_focus_time.AddFocusTimeFragment"
+        android:label="Add Focus Time"
+        tools:layout="@layout/fragment_add_focus_time" />
+
+    <action
+        android:id="@+id/action_main_focus_timeFragment_to_add_focus_timeFragment"
+        app:destination="@id/nav_add_focus_time" />
 </navigation>
