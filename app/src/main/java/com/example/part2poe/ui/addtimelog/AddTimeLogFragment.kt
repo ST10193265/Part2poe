@@ -28,11 +28,10 @@ class AddTimeLogFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(addTimeLogViewModel::class.java)
     }
 
+    // method to allow user to add an image to the time log
     private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
-            // Handle the selected image here, you may want to display it or save its URI
-            // For example:
             val selectedImageUri = data?.data
             Toast.makeText(requireContext(), "Image selected: $selectedImageUri", Toast.LENGTH_SHORT).show()
         }
@@ -45,6 +44,7 @@ class AddTimeLogFragment : Fragment() {
         _binding = FragmentAddtimelogBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // binds all the feilds
         val editDescription = binding.etxtDescription
         val btnStartTimer = binding.btnStartTimer
         val editProject = binding.dpProject
@@ -52,7 +52,6 @@ class AddTimeLogFragment : Fragment() {
         val btnSave = binding.btnSave
         val btnCancel = binding.btnCancel
         val btnAddPhoto = binding.btnAddphoto
-        // binds all the feilds
 
         // Create a list of PROJECT names
         val projectNames = GlobalVar.GlobalVariables.oagProject.map { it.projectName }
@@ -62,6 +61,7 @@ class AddTimeLogFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editProject.adapter = adapter
 
+        // method for starting timer
         btnStartTimer.setOnClickListener {
             startTime = System.currentTimeMillis()
             btnStartTimer.text = "Timer Started"
@@ -69,15 +69,18 @@ class AddTimeLogFragment : Fragment() {
 
         }
 
+            // method for save
         btnSave.setOnClickListener {
 
+            // storing user entered and selected values
             val description = editDescription.text.toString().trim()
             val project = editProject.selectedItem.toString()
             val calender = editCalendar.date.toString()
 
+            // validates the data eneterd then adds it to the project class
             if (startTime != null && isValidInput(description, project, calender)) {
                 addNewTimeLog(description, startTime!!, project, calender)
-                // validates the data eneterd then adds it to the project class
+
             } else {
                 Toast.makeText(requireContext(), "Please fill in all the fields and/or start timer", Toast.LENGTH_SHORT).show()
             }
@@ -95,12 +98,13 @@ class AddTimeLogFragment : Fragment() {
 
         btnAddPhoto.setOnClickListener {
             openImageGallery()
+            // opens gallery of user
         }
 
         return root
     }
 
-
+// method to check for valid fields
     private fun isValidInput(
 
         description: String,
@@ -109,8 +113,8 @@ class AddTimeLogFragment : Fragment() {
     ): Boolean {
         return  description.isNotEmpty()  && calendar.isNotEmpty() && project.isNotEmpty()
     }
-    // validates feilds
 
+// method for adding a new time log
     private fun addNewTimeLog(
 
         description: String,
@@ -118,7 +122,7 @@ class AddTimeLogFragment : Fragment() {
         calendar: String,
         project: String,
         endTime: Long? = null,
-        imageUri: Uri? = null // Optional parameter for image URI
+        imageUri: Uri? = null
     ) {
         val timelog = TimeLog(description, startTime, endTime, calendar, project, imageUri)
         GlobalVar.GlobalVariables.oagTimeLog.add(timelog)
@@ -137,8 +141,9 @@ class AddTimeLogFragment : Fragment() {
     private fun navigateToMainTimeLog() {
         findNavController().navigate(MainProjectFragmentDirections.actionAddtimelogFragmentToMaintimelogFragment())
     }
-    //navigates to main project
+    //navigates to main time log
 
+    // opens image in gallery method
     private fun openImageGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"

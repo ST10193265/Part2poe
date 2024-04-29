@@ -6,4 +6,4 @@ data class TimeLog(val description: String, val startTime: Long, var endTime: Lo
 {
 
 }
-// stores all th project objects
+// stores all the time log objects
