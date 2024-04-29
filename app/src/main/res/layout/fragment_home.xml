@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
+        android:backgroundTint="@color/teal_700"
         android:text="Category" />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Projects"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -33,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Time Log"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -40,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Invoice"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -47,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Focus Time"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
 </LinearLayout>

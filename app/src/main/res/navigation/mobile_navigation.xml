@@ -95,6 +95,9 @@
         android:id="@+id/action_maintimelogFragment_to_addtimelogFragment"
         app:destination="@id/nav_addtimelog" />
 
+    <action
+        android:id="@+id/action_addtimelogFragment_to_maintimelogFragment"
+        app:destination="@id/nav_maintimelog" />
 
     <fragment
         android:id="@+id/nav_main_category"
@@ -169,4 +172,15 @@
     <action
         android:id="@+id/action_add_focus_timeFragment_to_main_focus_timeFragment"
         app:destination="@id/nav_main_focus_time" />
+
+    <fragment
+        android:id="@+id/nav_invoice"
+        android:name="com.example.part2poe.ui.invoice.InvoiceFragment"
+        android:label="Invoice"
+        tools:layout="@layout/fragment_invoice" />
+
+    <action
+        android:id="@+id/action_homeFragment_to_invoiceFragment"
+        app:destination="@id/nav_invoice" />
+
 </navigation>

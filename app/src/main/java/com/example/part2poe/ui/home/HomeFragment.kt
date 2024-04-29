@@ -56,7 +56,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.button_invoice -> {
-                // Handle Invoice button click
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInvoiceFragment())
             }
 
             R.id.button_focustime -> {

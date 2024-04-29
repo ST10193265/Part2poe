@@ -7,24 +7,39 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.part2poe.R
-import com.example.part2poe.ui.register.RegisterFragmentDirections
+import com.example.part2poe.databinding.FragmentMaintimelogBinding
 
 class MainTimeLogFragment: Fragment() {
+    private var _binding: FragmentMaintimelogBinding? = null
+    private val binding get() = _binding!!
+    // bindes the layout fragement
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_maintimelog, container, false)
+    ): View {
+        _binding = FragmentMaintimelogBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        val btnAddTimeLog: Button = view.findViewById(R.id.btnAddTimeLog)
-        btnAddTimeLog.setOnClickListener {
-
-            findNavController().navigate(MainTimeLogFragmentDirections.actionMaintimelogFragmentToAddtimelogFragment())
+        // Find the Add New Category button and set a click listener
+        val addTimeLogButton: Button = binding.btnAddTimeLog
+        addTimeLogButton.setOnClickListener {
+            navigateToAddCategory()
+            // navigates to the add categroy
         }
 
-        return view
+        return root
+    }
+
+    private fun navigateToAddCategory() {
+        findNavController().navigate(MainTimeLogFragmentDirections.actionMaintimelogFragmentToAddtimelogFragment())
+    }
+    // navigates to the ad category
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
