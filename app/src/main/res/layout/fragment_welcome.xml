@@ -37,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.173"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Login"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.845"
@@ -58,3 +60,7 @@
         app:layout_constraintVertical_bias="0.875" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- this method was adapted from geeksforgeeks
+    https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+    adityamshidlyali
+    https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->

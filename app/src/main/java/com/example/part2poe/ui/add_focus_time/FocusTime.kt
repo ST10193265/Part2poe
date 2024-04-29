@@ -5,3 +5,4 @@ data class FocusTime(val projectName: String, val timeperiod: String, val calend
 {
 
 }
+// class that stores all the focus time objects

@@ -96,7 +96,7 @@ class AddFocusTimeFragment : Fragment() {
 
 
     private fun navigateToMainFocusTime() {
-        findNavController().navigate(MainFocusTimeFragmentDirections.actionMainFocusTimeFragmentToAddFocusTimeFragment())
+        findNavController().navigate(MainFocusTimeFragmentDirections.actionAddFocusTimeFragmentToMainFocusTimeFragment())
     }
     // navigate to the main focus time
 

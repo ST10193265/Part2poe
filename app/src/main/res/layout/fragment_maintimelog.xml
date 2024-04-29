@@ -23,7 +23,7 @@
         android:text="Filter By:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.116" />
@@ -68,6 +68,7 @@
         android:layout_width="268dp"
         android:layout_height="55dp"
         android:text="Add New Time Log"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -75,16 +76,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.662" />
 
+    <TextView
+        android:id="@+id/txtEndTimeLog"
+        android:layout_width="105dp"
+        android:layout_height="22dp"
+        android:text="Select a Time Log To End:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
+
+    <Spinner
+        android:id="@+id/dpTimeLog"
+        android:layout_width="312dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
     <Button
         android:id="@+id/btnEndTimeLog"
         android:layout_width="268dp"
         android:layout_height="55dp"
+        android:backgroundTint="@color/teal_700"
         android:text="End Time Log"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.928" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- this method was adapted from geeksforgeeks
+    https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+    adityamshidlyali
+    https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->

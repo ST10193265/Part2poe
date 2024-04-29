@@ -17,6 +17,6 @@
     <string name="view_password">View Password</string>
     <string name="login">Login</string>
     <string name="menu_maintimelog" />
-    <string name="menu_home" />
+    <string name="menu_home">Home</string>
     <string name="menu_addtimelog" />
 </resources>

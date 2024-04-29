@@ -4,3 +4,4 @@ data class Category(val categoryname: String, val description: String )
 {
 
 }
+// category class that stores all the categories entered

@@ -12,6 +12,7 @@
         android:layout_width="111dp"
         android:layout_height="36dp"
         android:text="Save"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.225"
@@ -24,6 +25,7 @@
         android:layout_width="118dp"
         android:layout_height="37dp"
         android:text="Cancel"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.646"
@@ -181,17 +183,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.905" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="144dp"
-        android:layout_height="196dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- this method was adapted from geeksforgeeks
+    https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+    adityamshidlyali
+    https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->

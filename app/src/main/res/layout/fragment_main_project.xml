@@ -44,6 +44,7 @@
         android:layout_width="268dp"
         android:layout_height="55dp"
         android:text="Add New Project"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -51,3 +52,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- this method was adapted from geeksforgeeks
+    https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+    adityamshidlyali
+    https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->

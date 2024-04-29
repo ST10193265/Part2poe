@@ -41,6 +41,10 @@ class RegisterFragment : Fragment() {
         val btnRegister = binding.btnRegister
         val iconViewPassword = binding.iconViewPassword
 
+        // this method was adapted from android developer
+        // https://developer.android.com/topic/libraries/view-binding
+
+        // listener for register button
         btnRegister.setOnClickListener {
             val name = editName.text.toString().trim()
             val surname = editSurname.text.toString().trim()
@@ -56,12 +60,21 @@ class RegisterFragment : Fragment() {
                     "Please fill in all the fields",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                // this method was adapted in geeksforgeeks
+                // https://www.geeksforgeeks.org/android-toast-in-kotlin/
+                // SriHarshaBammidi
+                // https://auth.geeksforgeeks.org/user/SriHarshaBammidi/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user
+
             }
         }
-
+        // listener for icon view password
         iconViewPassword.setOnClickListener {
             togglePasswordVisibility(editPassword, iconViewPassword)
         }
+
+        // the method above were adapted android
+        // https://kotlinandroid.org/button/setonclicklistener/#:~:text=Steps%20to%20call%20setOnClickListener%20%28%29%20on%20Button%201,executed%20when%20a%20tap%20happens%20on%20the%20button.
 
         return root
     }
@@ -71,6 +84,7 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 
+    // checking valid inputs
     private fun isValidInput(
         name: String,
         surname: String,
@@ -81,6 +95,7 @@ class RegisterFragment : Fragment() {
         return name.isNotEmpty() && surname.isNotEmpty() && email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()
     }
 
+    // register user method
     private fun registerUser(
         name: String,
         surname: String,
@@ -102,12 +117,22 @@ class RegisterFragment : Fragment() {
         for (editText in editTexts) {
             editText.text.clear()
         }
+        // clears feilds
+        // this method was adapted from techiedelight
+        // https://www.techiedelight.com/clear-list-in-kotlin/#:~:text=Clear%20a%20List%20in%20Kotlin%201%201.%20Using,remove%28%29%20function%20...%204%204.%20Using%20Iterator.remove%28%29%20function
+        // vivek-srivastava
+        // https://www.techiedelight.com/vivek-srivastava/
     }
 
     private fun navigateToLogin() {
         findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
     }
 
+    //navigates to main time log
+    // this method has been adapted from android developer
+    // https://developer.android.com/guide/navigation/navcontroller
+
+    // method to making password visible
     private fun togglePasswordVisibility(editPassword: TextView, iconViewPassword: View) {
         val inputType = editPassword.inputType
         if (inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
@@ -122,4 +147,9 @@ class RegisterFragment : Fragment() {
             editPassword.setSelection(editPassword.text.length)
         }
     }
+    // this method was adapted from stack overflow
+    // https://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
+    // mmbs
+    // https://stackoverflow.com/users/2065587/mmbs
+
 }

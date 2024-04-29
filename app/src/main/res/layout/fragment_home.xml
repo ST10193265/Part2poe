@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
+        android:backgroundTint="@color/teal_700"
         android:text="Category" />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Projects"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -33,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Time Log"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -40,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Invoice"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
     <Button
@@ -47,6 +51,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Focus Time"
+        android:backgroundTint="@color/teal_700"
         android:layout_marginBottom="35dp" />
 
 </LinearLayout>
+    <!-- this method was adapted from geeksforgeeks
+    https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+    adityamshidlyali
+    https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->

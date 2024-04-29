@@ -45,14 +45,25 @@ class WelcomeFragment : Fragment() {
         return root
     }
 
+    // this method was adapted from android developer
+    // https://developer.android.com/topic/libraries/view-binding
+
     private fun navigateToRegister() {
         findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment())
     }
+
+
+    //navigates to register
+    // this method has been adapted from android developer
+    // https://developer.android.com/guide/navigation/navcontroller
 
     private fun navigateToLogin() {
         findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment())
     }
 
+    //navigates to login
+    // this method has been adapted from android developer
+    // https://developer.android.com/guide/navigation/navcontroller
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

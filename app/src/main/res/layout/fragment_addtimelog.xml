@@ -12,6 +12,7 @@
         android:layout_width="111dp"
         android:layout_height="36dp"
         android:text="Save"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.225"
@@ -24,6 +25,7 @@
         android:layout_width="118dp"
         android:layout_height="37dp"
         android:text="Cancel"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.646"
@@ -115,13 +117,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.756" />
 
-    <EditText
-        android:id="@+id/etxtStartTime"
+    <Button
+        android:id="@+id/btnStartTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
+        android:text="Start Timer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.124"
@@ -134,6 +134,7 @@
         android:layout_width="159dp"
         android:layout_height="41dp"
         android:text="Add Picture"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.932"
@@ -143,3 +144,8 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!-- this method was adapted from geeksforgeeks
+https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
+adityamshidlyali
+https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/user/adityamshidlyali/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user -->
