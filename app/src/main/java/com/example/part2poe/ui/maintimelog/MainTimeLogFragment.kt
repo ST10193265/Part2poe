@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ListView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -33,19 +36,46 @@ class MainTimeLogFragment: Fragment() {
             // navigates to the add categroy
         }
 
+        val searchView: androidx.appcompat.widget.SearchView = binding.searchView
+        val cbDate: CheckBox = binding.cbDate
+        val listTimeLogs: ListView = binding.listTimeLogs
+
+        // Initialize the list adapter for the ListView
+        val timeLogDescriptions = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, timeLogDescriptions)
+        listTimeLogs.adapter = adapter
+
+        // Set up the SearchView to filter the list based on the project name and date
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                query?.let { filterTimeLogs(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // As the user types, filter the list
+                newText?.let { filterTimeLogs(it) }
+                return false
+            }
+        })
+
         // Find the Add New Category button and set a click listener
         val endTimeLogButton: Button = binding.btnEndTimeLog
+        val editTimeLog = binding.dpTimeLog
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        editTimeLog.adapter = adapter
+
+        val timeLogDescription = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
+
+
         endTimeLogButton.setOnClickListener {
             val selectedPosition = binding.dpTimeLog.selectedItemPosition
 
-            val editTimeLog = binding.dpTimeLog
-
-            val timeLogDescription = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
-
             val adapter =
                 ArrayAdapter(requireContext(), R.layout.simple_spinner_item, timeLogDescription)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            editTimeLog.adapter = adapter
+
 
             if (selectedPosition >= 0) {
 
@@ -75,6 +105,17 @@ class MainTimeLogFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun filterTimeLogs(query: String) {
+        // Filter the time logs based on the project name
+        val filteredList = GlobalVar.GlobalVariables.oagTimeLog.filter { timeLog ->
+            timeLog.description.contains(query, ignoreCase = true)
+        }.map { it.description }
+
+        // Update the ListView adapter with the filtered list
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
+        binding.listTimeLogs.adapter = adapter
     }
 
 }
