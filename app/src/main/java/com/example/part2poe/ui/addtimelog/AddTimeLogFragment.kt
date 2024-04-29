@@ -23,7 +23,7 @@ class AddTimeLogFragment : Fragment() {
     private var _binding: FragmentAddtimelogBinding? = null
     private val binding get() = _binding!!
     //binds the layout fragment
-
+    private var startTime: Long? = null
     private val addTimeLogViewModel: AddTimeLogViewModel by lazy {
         ViewModelProvider(requireActivity()).get(addTimeLogViewModel::class.java)
     }
@@ -46,7 +46,7 @@ class AddTimeLogFragment : Fragment() {
         val root: View = binding.root
 
         val editDescription = binding.etxtDescription
-        val editStartTime = binding.etxtStartTime
+        val btnStartTimer = binding.btnStartTimer
         val editProject = binding.dpProject
         val editCalendar = binding.calendarView
         val btnSave = binding.btnSave
@@ -62,28 +62,34 @@ class AddTimeLogFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editProject.adapter = adapter
 
+        btnStartTimer.setOnClickListener {
+            startTime = System.currentTimeMillis()
+            btnStartTimer.text = "Timer Started"
+            btnStartTimer.isEnabled = false
+
+        }
+
         btnSave.setOnClickListener {
 
             val description = editDescription.text.toString().trim()
-            val startTime = editStartTime.text.toString().trim()
             val project = editProject.selectedItem.toString()
             val calender = editCalendar.date.toString()
 
-            if (isValidInput(description, startTime, project, calender)) {
-                addNewTimeLog(description, startTime, project, calender)
+            if (startTime != null && isValidInput(description, project, calender)) {
+                addNewTimeLog(description, startTime!!, project, calender)
                 // validates the data eneterd then adds it to the project class
             } else {
-                Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill in all the fields and/or start timer", Toast.LENGTH_SHORT).show()
             }
 
 
             navigateToMainTimeLog()
-            clearFields( editDescription, editStartTime)
+            clearFields( editDescription)
             //clears feilds and then navigates to main time log
         }
 
         btnCancel.setOnClickListener {
-            clearFields( editDescription, editStartTime)
+            clearFields( editDescription)
             // clears feilds
         }
 
@@ -98,23 +104,23 @@ class AddTimeLogFragment : Fragment() {
     private fun isValidInput(
 
         description: String,
-        startTime: String,
         project: String,
         calendar: String
     ): Boolean {
-        return  description.isNotEmpty() && startTime.isNotEmpty()  && calendar.isNotEmpty() && project.isNotEmpty()
+        return  description.isNotEmpty()  && calendar.isNotEmpty() && project.isNotEmpty()
     }
     // validates feilds
 
     private fun addNewTimeLog(
 
         description: String,
-        startTime: String,
+        startTime: Long,
         calendar: String,
         project: String,
+        endTime: Long? = null,
         imageUri: Uri? = null // Optional parameter for image URI
     ) {
-        val timelog = TimeLog(description, startTime, calendar, project, imageUri)
+        val timelog = TimeLog(description, startTime, endTime, calendar, project, imageUri)
         GlobalVar.GlobalVariables.oagTimeLog.add(timelog)
 
         Toast.makeText(requireContext(), "New time log added successfully!", Toast.LENGTH_SHORT).show()
