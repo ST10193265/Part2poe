@@ -22,7 +22,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         // Initialize buttons and set click listeners
@@ -41,6 +41,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         return view
     }
 
+    // on click navigation methods for all the buttons
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_category -> {
@@ -63,6 +64,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMainFocusTimeFragment())
 
             }
+
+            // this method has been adapted from android developer
+            // https://developer.android.com/guide/navigation/navcontroller
+
         }
     }
 }

@@ -16,6 +16,9 @@ class InvoiceFragment: Fragment() {
     private var _binding: FragmentInvoiceBinding? = null
     private val binding get() = _binding!!
 
+    // this method was adapted from android developer
+    // https://developer.android.com/topic/libraries/view-binding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,12 +30,15 @@ class InvoiceFragment: Fragment() {
         val etxtTrackedHours = binding.etxtTrackedHours
         val etxtCost = binding.etxtCost
 
-        // Assuming GlobalVar.GlobalVariables.oagProject is a list of Project objects
+        // this method was adapted from android developer
+        // https://developer.android.com/topic/libraries/view-binding
+
         val projectNames = GlobalVar.GlobalVariables.oagProject.map { it.projectName }
         val projectAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, projectNames)
         projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         dpProject.adapter = projectAdapter
 
+        // method for the selected item listener
         dpProject.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -48,7 +54,7 @@ class InvoiceFragment: Fragment() {
                 etxtTrackedHours.setText(totalHours.toString())
                 etxtCost.setText(totalCost.toString())
             }
-
+            // method for when nothing is selected
             override fun onNothingSelected(parent: AdapterView<*>) {
                 Toast.makeText(
                     requireContext(),
@@ -59,7 +65,7 @@ class InvoiceFragment: Fragment() {
         }
         return root
     }
-
+   // method to calculate total hours
     private fun calculateTotalHours(description: String): Double {
         // Assuming GlobalVar.GlobalVariables.oagTimeLog is a list of TimeLog objects
         return GlobalVar.GlobalVariables.oagTimeLog

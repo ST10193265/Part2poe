@@ -31,13 +31,14 @@ class ForgetPasswordFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
     }
 
+    // this method was adapted from android developer
+    // https://developer.android.com/topic/libraries/view-binding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
 
         forgetPasswordViewModel = ViewModelProvider(this).get(ForgetPasswordViewModel::class.java)
 
@@ -110,5 +111,8 @@ class ForgetPasswordFragment : Fragment() {
             editPassword.setSelection(editPassword.text.length)
         }
     }
-
+    // this method was adapted from stack overflow
+    // https://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
+    // mmbs
+    // https://stackoverflow.com/users/2065587/mmbs
 }

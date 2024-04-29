@@ -91,5 +91,8 @@ class LoginFragment : Fragment() {
             binding.editPassword.setSelection(binding.editPassword.text.length)
         }
     }
-
+    // this method was adapted from stack overflow
+    // https://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
+    // mmbs
+    // https://stackoverflow.com/users/2065587/mmbs
 }

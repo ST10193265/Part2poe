@@ -27,6 +27,9 @@ class AddTimeLogFragment : Fragment() {
     private val addTimeLogViewModel: AddTimeLogViewModel by lazy {
         ViewModelProvider(requireActivity()).get(addTimeLogViewModel::class.java)
     }
+    // this method was adapted from android developer
+    // https://developer.android.com/topic/libraries/view-binding
+
 
     // method to allow user to add an image to the time log
     private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -35,6 +38,12 @@ class AddTimeLogFragment : Fragment() {
             val selectedImageUri = data?.data
             Toast.makeText(requireContext(), "Image selected: $selectedImageUri", Toast.LENGTH_SHORT).show()
         }
+
+        // this method was adapted from geeksfor geeks
+        // https://www.geeksforgeeks.org/photo-picker-in-android-13-with-example-project/
+        // chaitanyamunje
+        // https://auth.geeksforgeeks.org/user/chaitanyamunje/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user
+
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +61,9 @@ class AddTimeLogFragment : Fragment() {
         val btnSave = binding.btnSave
         val btnCancel = binding.btnCancel
         val btnAddPhoto = binding.btnAddphoto
+
+        // this method was adapted from android developer
+        // https://developer.android.com/topic/libraries/view-binding
 
         // Create a list of PROJECT names
         val projectNames = GlobalVar.GlobalVariables.oagProject.map { it.projectName }
@@ -101,6 +113,9 @@ class AddTimeLogFragment : Fragment() {
             // opens gallery of user
         }
 
+        // the method above were adapted android
+        // https://kotlinandroid.org/button/setonclicklistener/#:~:text=Steps%20to%20call%20setOnClickListener%20%28%29%20on%20Button%201,executed%20when%20a%20tap%20happens%20on%20the%20button.
+
         return root
     }
 
@@ -128,6 +143,12 @@ class AddTimeLogFragment : Fragment() {
         GlobalVar.GlobalVariables.oagTimeLog.add(timelog)
 
         Toast.makeText(requireContext(), "New time log added successfully!", Toast.LENGTH_SHORT).show()
+
+    // this method was adapted in geeksforgeeks
+    // https://www.geeksforgeeks.org/android-toast-in-kotlin/
+    // SriHarshaBammidi
+    // https://auth.geeksforgeeks.org/user/SriHarshaBammidi/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user
+
     }
 
     private fun clearFields(vararg editTexts: EditText) {
@@ -136,12 +157,17 @@ class AddTimeLogFragment : Fragment() {
         }
     }
     // clears feilds
-
+    // this method was adapted from techiedelight
+    // https://www.techiedelight.com/clear-list-in-kotlin/#:~:text=Clear%20a%20List%20in%20Kotlin%201%201.%20Using,remove%28%29%20function%20...%204%204.%20Using%20Iterator.remove%28%29%20function
+    // vivek-srivastava
+    // https://www.techiedelight.com/vivek-srivastava/
 
     private fun navigateToMainTimeLog() {
         findNavController().navigate(MainProjectFragmentDirections.actionAddtimelogFragmentToMaintimelogFragment())
     }
     //navigates to main time log
+    // this method has been adapted from android developer
+    // https://developer.android.com/guide/navigation/navcontroller
 
     // opens image in gallery method
     private fun openImageGallery() {
@@ -149,6 +175,11 @@ class AddTimeLogFragment : Fragment() {
         intent.type = "image/*"
         pickImage.launch(intent)
     }
+
+    // this method was adapted from geeksfor geeks
+    // https://www.geeksforgeeks.org/photo-picker-in-android-13-with-example-project/
+    // chaitanyamunje
+    // https://auth.geeksforgeeks.org/user/chaitanyamunje/articles?utm_source=geeksforgeeks&utm_medium=article_author&utm_campaign=auth_user
 
     override fun onDestroyView() {
         super.onDestroyView()

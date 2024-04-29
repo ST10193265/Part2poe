@@ -25,6 +25,9 @@ class MainTimeLogFragment: Fragment() {
     private var startDate: Long? = null
     private var endDate: Long? = null
 
+    // this method was adapted from android developer
+    // https://developer.android.com/topic/libraries/view-binding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,13 +36,14 @@ class MainTimeLogFragment: Fragment() {
         _binding = FragmentMaintimelogBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Find the Add New Category button and set a click listener
+        // this method was adapted from android developer
+        // https://developer.android.com/topic/libraries/view-binding
+
+
         val addTimeLogButton: Button = binding.btnAddTimeLog
         addTimeLogButton.setOnClickListener {
             navigateToAddTimeLog()
-            // navigates to the add categroy
-
-
+            // navigates to the add time log
         }
 
         val Date: CheckBox = binding.cbDate
