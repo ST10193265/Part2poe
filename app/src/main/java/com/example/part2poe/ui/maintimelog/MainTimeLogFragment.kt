@@ -2,6 +2,7 @@ package com.example.part2poe.ui.maintimelog
 
 import android.R
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +16,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.databinding.FragmentMaintimelogBinding
 import com.example.part2poe.ui.GlobalVar
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.GregorianCalendar
+import java.util.Locale
 
 class MainTimeLogFragment: Fragment() {
     private var _binding: FragmentMaintimelogBinding? = null
@@ -27,6 +31,7 @@ class MainTimeLogFragment: Fragment() {
 
     // this method was adapted from android developer
     // https://developer.android.com/topic/libraries/view-binding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +63,32 @@ class MainTimeLogFragment: Fragment() {
         val listTimeLogs: ListView = binding.listTimeLogs
 
         // Initialize the list adapter for the ListView
-        val timeLogDescriptions = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, timeLogDescriptions)
+
+        data class TimeLogEntry(
+            val description: String,
+            val date: String,
+            val project: String,
+            val startTime: String,
+            val endTime: String,
+            val photoUrl: Uri?
+        )
+
+        val timeLogEntries = GlobalVar.GlobalVariables.oagTimeLog.map {
+            TimeLogEntry(
+                it.description,
+                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(it.calendar)),
+                it.project,
+                SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(it.startTime)),
+                SimpleDateFormat("HH:mm", Locale.getDefault()).format(it.endTime?.let { it1 ->
+                    Date(
+                        it1
+                    )
+                }),
+                it.imageUri
+            )
+        }
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, timeLogEntries)
         listTimeLogs.adapter = adapter
 
         // Set up the SearchView to filter the list based on the project name and date
