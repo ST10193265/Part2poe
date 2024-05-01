@@ -1,3 +1,5 @@
+package com.example.part2poe.ui.main_category
+
 import android.R
 import androidx.fragment.app.Fragment
 import android.os.Bundle
