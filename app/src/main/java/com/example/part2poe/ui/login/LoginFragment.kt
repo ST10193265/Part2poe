@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
 import com.example.part2poe.databinding.FragmentLoginBinding
+import com.example.part2poe.ui.forgetpassword.ForgetPasswordFragment
 import com.example.part2poe.ui.home.HomeFragmentDirections
 
 class LoginFragment : Fragment() {
@@ -60,7 +61,7 @@ class LoginFragment : Fragment() {
         val username = binding.editUsername.text.toString()
         val password = binding.editPassword.text.toString()
 
-        val isValid = loginViewModel.isValidUser(username, if (updatedPassword.isNotEmpty()) updatedPassword else password)
+        val isValid = loginViewModel.isValidUser(username, password)
         if (isValid) {
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             findNavController().navigate(HomeFragmentDirections.actionLoginFragmentToHomeFragment())
@@ -70,11 +71,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun onForgotPasswordClicked() {
-        val username = binding.editUsername.text.toString()
-        val email = loginViewModel.getEmail(username) ?: ""
+        val username = loginViewModel.getRegisteredUsername() ?: ""
+        val email = loginViewModel.getRegisteredEmail() ?: ""
 
-        val action = LoginFragmentDirections.actionLoginFragmentToForgetpasswordFragment(username, email)
-        findNavController().navigate(action)
+        if (username.isNotEmpty() && email.isNotEmpty()) {
+            val action = LoginFragmentDirections.actionLoginFragmentToForgetpasswordFragment(username, email)
+            findNavController().navigate(action)
+
+        } else {
+            Toast.makeText(context, "Username or email is missing", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun togglePasswordVisibility() {

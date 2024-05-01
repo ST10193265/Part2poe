@@ -15,21 +15,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.R
-import com.example.part2poe.databinding.FragmentLoginBinding
+import com.example.part2poe.databinding.FragmentForgetpasswordBinding
 import com.example.part2poe.ui.login.LoginViewModel
 
 class ForgetPasswordFragment : Fragment() {
 
     private lateinit var forgetPasswordViewModel: ForgetPasswordViewModel
-    private lateinit var username: String
-    private lateinit var email: String
     private lateinit var newPassword: String
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentForgetpasswordBinding? = null
+    val iconViewPassword = binding.iconViewPassword
     private val binding get() = _binding!!
+
     // Lazily initialize loginViewModel
-    private val loginViewModel: LoginViewModel by lazy {
+    val loginViewModel: LoginViewModel by lazy {
         ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
     }
+
 
     // this method was adapted from android developer
     // https://developer.android.com/topic/libraries/view-binding
@@ -40,12 +41,16 @@ class ForgetPasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        _binding = FragmentForgetpasswordBinding.inflate(inflater, container, false)
+        val view = binding.root
+
         forgetPasswordViewModel = ViewModelProvider(this).get(ForgetPasswordViewModel::class.java)
 
-        // Retrieve username and email from arguments
-        username = arguments?.getString("username") ?: ""
-        email = arguments?.getString("email") ?: ""
+        // Retrieve username and email from arguments with default values
+        val username: String = arguments?.getString("username") ?: ""
+        val email: String = arguments?.getString("email") ?: ""
 
+        // Now both username and email are non-nullable Strings
         val initialPassword = forgetPasswordViewModel.getPassword(username) ?: ""
         forgetPasswordViewModel.setRegisteredUserCredentials(username, email, initialPassword)
 
@@ -90,6 +95,16 @@ class ForgetPasswordFragment : Fragment() {
                 Toast.makeText(context, "Invalid username or email", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // listener for icon view password
+        iconViewPassword.setOnClickListener {
+            togglePasswordVisibility(editPassword, iconViewPassword)
+
+        }
+
+        // the method above were adapted android
+        // https://kotlinandroid.org/button/setonclicklistener/#:~:text=Steps%20to%20call%20setOnClickListener%20%28%29%20on%20Button%201,executed%20when%20a%20tap%20happens%20on%20the%20button.
+
         return root
     }
     private fun navigateToLogin(updatedPassword: String) {
