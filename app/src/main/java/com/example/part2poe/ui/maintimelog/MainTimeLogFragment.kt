@@ -1,8 +1,6 @@
 package com.example.part2poe.ui.maintimelog
 
 import android.R
-import android.app.DatePickerDialog
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +14,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.part2poe.databinding.FragmentMaintimelogBinding
 import com.example.part2poe.ui.GlobalVar
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.example.part2poe.R.style.CustomMaterialCalendarStyle
+import com.example.part2poe.ui.main_category.MainCategoryFragmentDirections
+import com.example.part2poe.ui.main_focus_time.MainFocusTimeFragmentDirections
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
-import java.util.GregorianCalendar
 import java.util.Locale
 
 class MainTimeLogFragment: Fragment() {
     private var _binding: FragmentMaintimelogBinding? = null
     private val binding get() = _binding!!
+
     // bindes the layout fragement
     private var startDate: Long? = null
     private var endDate: Long? = null
@@ -54,8 +55,23 @@ class MainTimeLogFragment: Fragment() {
         val Date: CheckBox = binding.cbDate
         Date.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                showDatePickerDialog(isStart = true)
+                showDateRangePicker()
+            } else {
+                val originalList = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
+
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    originalList
+                )
+                binding.listTimeLogs.adapter = adapter
             }
+        }
+
+
+        val homeButton: Button = binding.btnHome
+        homeButton.setOnClickListener {
+            findNavController().navigate(MainTimeLogFragmentDirections.actionMaintimelogFragmentToHomeFragment())
         }
 
         val searchView: androidx.appcompat.widget.SearchView = binding.searchView
@@ -64,35 +80,14 @@ class MainTimeLogFragment: Fragment() {
 
         // Initialize the list adapter for the ListView
 
-        data class TimeLogEntry(
-            val description: String,
-            val date: String,
-            val project: String,
-            val startTime: String,
-            val endTime: String,
-            val photoUrl: Uri?
-        )
-
-        val timeLogEntries = GlobalVar.GlobalVariables.oagTimeLog.map {
-            TimeLogEntry(
-                it.description,
-                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(it.calendar)),
-                it.project,
-                SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(it.startTime)),
-                SimpleDateFormat("HH:mm", Locale.getDefault()).format(it.endTime?.let { it1 ->
-                    Date(
-                        it1
-                    )
-                }),
-                it.imageUri
-            )
-        }
-
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, timeLogEntries)
+        val timeLogEntries = GlobalVar.GlobalVariables.oagTimeLog.map { it.description }
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, timeLogEntries)
         listTimeLogs.adapter = adapter
 
         // Set up the SearchView to filter the list based on the project name and date
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 query?.let { filterTimeLogs(it) }
@@ -152,27 +147,23 @@ class MainTimeLogFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    private fun showDatePickerDialog(isStart: Boolean) {
-        val calendar = Calendar.getInstance()
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val selectedDate = GregorianCalendar(year, month, dayOfMonth).timeInMillis
-                if (isStart) {
-                    startDate = selectedDate
-                    showDatePickerDialog(isStart = false) // Show the end date picker after selecting the start date
-                } else {
-                    endDate = selectedDate
-                    // Now you have both start and end dates, you can filter the time logs
-                    filterTimeLogsByDate()
-                }
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
-        datePickerDialog.show()
+
+    private fun showDateRangePicker() {
+        val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker().apply {
+            setTitleText("Select dates")
+            setTheme(CustomMaterialCalendarStyle)
+        }.build()
+
+        dateRangePicker.addOnPositiveButtonClickListener { dateRange ->
+            val startDate = Date(dateRange.first)
+            val endDate = Date(dateRange.second)
+            // Use startDate and endDate to filter your list view
+            filterTimeLogsByDate(startDate, endDate)
+        }
+
+        dateRangePicker.show(parentFragmentManager, dateRangePicker.toString())
     }
+
     private fun filterTimeLogs(query: String) {
         // Filter the time logs based on the project name
         val filteredList = GlobalVar.GlobalVariables.oagTimeLog.filter { timeLog ->
@@ -180,11 +171,26 @@ class MainTimeLogFragment: Fragment() {
         }.map { it.description }
 
         // Update the ListView adapter with the filtered list
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
         binding.listTimeLogs.adapter = adapter
     }
-    private fun filterTimeLogsByDate() {
 
+    private fun filterTimeLogsByDate(startDate: Date, endDate: Date) {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        // Filter the time logs based on the date range
+        val filteredList = GlobalVar.GlobalVariables.oagTimeLog.filter { timeLog ->
+            val logDate = timeLog.calendar
+            logDate != null && logDate >= startDate && logDate <= endDate
+        }.map { timeLog ->
+            // Map each timeLog to its description or another appropriate representation
+            timeLog.description
+        }
+
+        // Update the ListView adapter with the filtered list
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
+        binding.listTimeLogs.adapter = adapter
     }
-
 }

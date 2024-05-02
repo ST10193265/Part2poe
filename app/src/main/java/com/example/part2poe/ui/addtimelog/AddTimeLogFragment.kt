@@ -13,10 +13,13 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import android.widget.ArrayAdapter
+import android.widget.CalendarView
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.part2poe.databinding.FragmentAddtimelogBinding
 import com.example.part2poe.ui.GlobalVar
 import com.example.part2poe.ui.main_project.MainProjectFragmentDirections
+import java.util.Calendar
+import java.util.Date
 
 
 class AddTimeLogFragment : Fragment() {
@@ -81,17 +84,34 @@ class AddTimeLogFragment : Fragment() {
 
         }
 
-            // method for save
+        // Assuming your CalendarView has the ID 'calendarView' in your layout
+        val calendarView = binding.calendarView
+
+         // Variable to hold the selected date as a Date object
+        var calendarDate: Date? = null
+
+          // Set the OnDateChangeListener to the CalendarView
+        calendarView.setOnDateChangeListener { view: CalendarView, year: Int, month: Int, dayOfMonth: Int ->
+            // Create a Calendar instance to convert the selected date to a Date object
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+
+            // Assign the selected date to 'calendarDate'
+            calendarDate = calendar.time
+        }
+
+
+        // method for save
         btnSave.setOnClickListener {
 
             // storing user entered and selected values
             val description = editDescription.text.toString().trim()
             val project = editProject.selectedItem.toString()
-            val calender = editCalendar.date.toString()
+            val calender = calendarDate
 
             // validates the data eneterd then adds it to the project class
             if (startTime != null && isValidInput(description, project, calender)) {
-                addNewTimeLog(description, startTime!!, project, calender)
+                addNewTimeLog(description, startTime!!,calender, project)
 
             } else {
                 Toast.makeText(requireContext(), "Please fill in all the fields and/or start timer", Toast.LENGTH_SHORT).show()
@@ -119,25 +139,26 @@ class AddTimeLogFragment : Fragment() {
         return root
     }
 
-// method to check for valid fields
+
+    // method to check for valid fields
     private fun isValidInput(
 
         description: String,
         project: String,
-        calendar: String
+        calendar: Date?
     ): Boolean {
-        return  description.isNotEmpty()  && calendar.isNotEmpty() && project.isNotEmpty()
+        return  description.isNotEmpty()  && calendar.toString().isNotEmpty() && project.isNotEmpty()
     }
 
 // method for adding a new time log
     private fun addNewTimeLog(
 
-        description: String,
-        startTime: Long,
-        calendar: String,
-        project: String,
-        endTime: Long? = null,
-        imageUri: Uri? = null
+    description: String,
+    startTime: Long,
+    calendar: Date?,
+    project: String,
+    endTime: Long? = null,
+    imageUri: Uri? = null
     ) {
         val timelog = TimeLog(description, startTime, endTime, calendar, project, imageUri)
         GlobalVar.GlobalVariables.oagTimeLog.add(timelog)

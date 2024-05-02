@@ -11,10 +11,12 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import android.widget.ArrayAdapter
+import android.widget.CalendarView
 import com.example.part2poe.databinding.FragmentAddProjectBinding
 import com.example.part2poe.ui.GlobalVar
 import com.example.part2poe.ui.main_project.MainProjectFragmentDirections
-
+import java.util.Calendar
+import java.util.Date
 
 
 class AddProjectFragment : Fragment() {
@@ -52,6 +54,22 @@ class AddProjectFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editCategory.adapter = adapter
 
+        // Assuming your CalendarView has the ID 'calendarView' in your layout
+        val calendarView = binding.calendarView
+
+        // Variable to hold the selected date as a Date object
+        var calendarDate: Date? = null
+
+        // Set the OnDateChangeListener to the CalendarView
+        calendarView.setOnDateChangeListener { view: CalendarView, year: Int, month: Int, dayOfMonth: Int ->
+            // Create a Calendar instance to convert the selected date to a Date object
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+
+            // Assign the selected date to 'calendarDate'
+            calendarDate = calendar.time
+        }
+
         btnSave.setOnClickListener {
             val projectName = editProjectName.text.toString().trim()
             val minGoal = editMinGoal.text.toString().trim()
@@ -59,10 +77,10 @@ class AddProjectFragment : Fragment() {
             val cost = editCost.text.toString().trim()
 
             val category = editCategory.selectedItem.toString()
-            val calendar = editCalendar.date.toString()
+            val calender = calendarDate
 
-            if (isValidInput(projectName, minGoal, maxGoal, cost, calendar)) {
-                addNewProject(projectName, minGoal, maxGoal, cost, calendar, category)
+            if (isValidInput(projectName, minGoal, maxGoal, cost, calender)) {
+                addNewProject(projectName, minGoal, maxGoal, cost, calender, category)
                 // validates the data eneterd then adds it to the project class
             } else {
                 Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show()
@@ -87,9 +105,9 @@ class AddProjectFragment : Fragment() {
         minGoal: String,
         maxGoal: String,
         cost: String,
-        calendar: String
+        calendar: Date?
     ): Boolean {
-        return projectName.isNotEmpty() && minGoal.isNotEmpty() && maxGoal.isNotEmpty() && cost.isNotEmpty() && calendar.isNotEmpty()
+        return projectName.isNotEmpty() && minGoal.isNotEmpty() && maxGoal.isNotEmpty() && cost.isNotEmpty() && calendar.toString().isNotEmpty()
     }
     // validates feilds
 
@@ -98,7 +116,7 @@ class AddProjectFragment : Fragment() {
         minGoal: String,
         maxGoal: String,
         cost: String,
-        calendar: String,
+        calendar: Date?,
         category: String
     ) {
         val project = Project(projectName, minGoal, maxGoal, cost, calendar, category)

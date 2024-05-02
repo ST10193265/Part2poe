@@ -13,6 +13,7 @@ import com.example.part2poe.R
 
 import com.example.part2poe.databinding.FragmentMainFocusTimeBinding
 import com.example.part2poe.ui.add_focus_time.AddFocusTimeViewModel
+import com.example.part2poe.ui.main_category.MainCategoryFragmentDirections
 
 
 class MainFocusTimeFragment : Fragment() {
@@ -29,6 +30,10 @@ class MainFocusTimeFragment : Fragment() {
 
         val addFocusTimeViewModel = ViewModelProvider(this).get(AddFocusTimeViewModel::class.java)
 
+        val homeButton: Button = binding.btnHome
+        homeButton.setOnClickListener {
+            findNavController().navigate(MainFocusTimeFragmentDirections.actionMainFocusTimeFragmentToHomeFragment())
+        }
 
         val addFocusTimeButton: Button = binding.btnAddFocusTime
         addFocusTimeButton.setOnClickListener {

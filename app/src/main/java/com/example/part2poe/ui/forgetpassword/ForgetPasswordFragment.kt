@@ -23,7 +23,7 @@ class ForgetPasswordFragment : Fragment() {
     private lateinit var forgetPasswordViewModel: ForgetPasswordViewModel
     private lateinit var newPassword: String
     private var _binding: FragmentForgetpasswordBinding? = null
-    val iconViewPassword = binding.iconViewPassword
+
     private val binding get() = _binding!!
 
     // Lazily initialize loginViewModel
@@ -95,12 +95,12 @@ class ForgetPasswordFragment : Fragment() {
                 Toast.makeText(context, "Invalid username or email", Toast.LENGTH_SHORT).show()
             }
         }
-
+        val iconViewPassword = binding.iconViewPassword
         // listener for icon view password
-        iconViewPassword.setOnClickListener {
-            togglePasswordVisibility(editPassword, iconViewPassword)
+       iconViewPassword.setOnClickListener {
+           togglePasswordVisibility(editPassword, iconViewPassword)
 
-        }
+       }
 
         // the method above were adapted android
         // https://kotlinandroid.org/button/setonclicklistener/#:~:text=Steps%20to%20call%20setOnClickListener%20%28%29%20on%20Button%201,executed%20when%20a%20tap%20happens%20on%20the%20button.

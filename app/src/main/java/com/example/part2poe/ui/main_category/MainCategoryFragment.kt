@@ -1,3 +1,5 @@
+package com.example.part2poe.ui.main_category
+
 import android.R
 import androidx.fragment.app.Fragment
 import android.os.Bundle
@@ -34,7 +36,10 @@ class MainCategoryFragment : Fragment() {
         // Create an adapter using the category names and a layout for list items
         val adapter = ArrayAdapter(requireContext(), R.layout.simple_list_item_1, categoryNames)
 
-       // testlist.adapter = adapter
+       val homeButton: Button = binding.btnHome
+        homeButton.setOnClickListener {
+            findNavController().navigate(MainCategoryFragmentDirections.actionMainCategoryFragmentToHomeFragment())
+        }
 
         // Find the Add New Category button and set a click listener
         val addCategoryButton: Button = binding.btnAddNewCategory
