@@ -84,6 +84,9 @@
         android:label="@string/menu_maintimelog"
         tools:layout="@layout/fragment_maintimelog" />
 
+    <action
+        android:id="@+id/action_maintimelogFragment_to_homeFragment"
+        app:destination="@id/nav_home" />
 
     <fragment
         android:id="@+id/nav_addtimelog"
@@ -106,6 +109,10 @@
         tools:layout="@layout/fragment_main_category" />
 
     <action
+        android:id="@+id/action_main_categoryFragment_to_homeFragment"
+        app:destination="@id/nav_home" />
+
+    <action
         android:id="@+id/action_homeFragment_to_main_categoryFragment"
         app:destination="@id/nav_main_category" />
 
@@ -116,6 +123,7 @@
         android:name="com.example.part2poe.ui.add_category.AddCategoryFragment"
         android:label="Add New Category"
         tools:layout="@layout/fragment_add_category" />
+
     <action
         android:id="@+id/action_main_categoryFragment_to_add_categoryFragment"
         app:destination="@id/nav_add_category" />
@@ -129,6 +137,10 @@
         android:name="com.example.part2poe.ui.main_project.MainProjectFragment"
         android:label="Main Project"
         tools:layout="@layout/fragment_main_project" />
+
+    <action
+        android:id="@+id/action_main_project_Fragment_to_homeFragment"
+        app:destination="@id/nav_home" />
 
     <action
         android:id="@+id/action_homeFragment_to_main_projectFragment"
@@ -155,6 +167,10 @@
         tools:layout="@layout/fragment_main_focus_time" />
 
     <action
+        android:id="@+id/action_main_focus_timeFragment_to_homeFragment"
+        app:destination="@id/nav_home" />
+
+    <action
         android:id="@+id/action_homeFragment_to_main_focus_timeFragment"
         app:destination="@id/nav_main_focus_time" />
 
@@ -178,6 +194,10 @@
         android:name="com.example.part2poe.ui.invoice.InvoiceFragment"
         android:label="Invoice"
         tools:layout="@layout/fragment_invoice" />
+
+    <action
+        android:id="@+id/action_invoiceFragment_to_homeFragment"
+        app:destination="@id/nav_home" />
 
     <action
         android:id="@+id/action_homeFragment_to_invoiceFragment"

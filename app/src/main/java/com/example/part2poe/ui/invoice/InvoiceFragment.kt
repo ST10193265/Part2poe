@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.part2poe.databinding.FragmentInvoiceBinding
 import com.example.part2poe.ui.GlobalVar
+import com.example.part2poe.ui.main_category.MainCategoryFragmentDirections
 
 class InvoiceFragment: Fragment() {
     private var _binding: FragmentInvoiceBinding? = null
@@ -37,6 +40,11 @@ class InvoiceFragment: Fragment() {
         val projectAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, projectNames)
         projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         dpProject.adapter = projectAdapter
+
+        val homeButton: Button = binding.btnHome
+        homeButton.setOnClickListener {
+            findNavController().navigate(InvoiceFragmentDirections.actionInvoiceFragmentToHomeFragment())
+        }
 
         // method for the selected item listener
         dpProject.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

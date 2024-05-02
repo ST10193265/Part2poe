@@ -16,6 +16,8 @@ import com.example.part2poe.databinding.FragmentMaintimelogBinding
 import com.example.part2poe.ui.GlobalVar
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.example.part2poe.R.style.CustomMaterialCalendarStyle
+import com.example.part2poe.ui.main_category.MainCategoryFragmentDirections
+import com.example.part2poe.ui.main_focus_time.MainFocusTimeFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -64,6 +66,12 @@ class MainTimeLogFragment: Fragment() {
                 )
                 binding.listTimeLogs.adapter = adapter
             }
+        }
+
+
+        val homeButton: Button = binding.btnHome
+        homeButton.setOnClickListener {
+            findNavController().navigate(MainTimeLogFragmentDirections.actionMaintimelogFragmentToHomeFragment())
         }
 
         val searchView: androidx.appcompat.widget.SearchView = binding.searchView
@@ -173,7 +181,7 @@ class MainTimeLogFragment: Fragment() {
 
         // Filter the time logs based on the date range
         val filteredList = GlobalVar.GlobalVariables.oagTimeLog.filter { timeLog ->
-            val logDate =timeLog.calendar
+            val logDate = timeLog.calendar
             logDate != null && logDate >= startDate && logDate <= endDate
         }.map { timeLog ->
             // Map each timeLog to its description or another appropriate representation
@@ -185,5 +193,4 @@ class MainTimeLogFragment: Fragment() {
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
         binding.listTimeLogs.adapter = adapter
     }
-
 }

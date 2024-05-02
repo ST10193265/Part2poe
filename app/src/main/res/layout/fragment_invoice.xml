@@ -81,6 +81,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.518" />
 
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="119dp"
+        android:layout_height="62dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- this method was adapted from geeksforgeeks
     https://www.geeksforgeeks.org/a-complete-guide-to-learn-xml-for-android-app-development/
